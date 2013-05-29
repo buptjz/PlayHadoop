@@ -1,0 +1,10 @@
+行关键字	用户ID	IP地址	域名	访问时间	SPName 上行流量 下行流量
+1
+2
+3
+
+在工程的Build Path中添加三个包：
+1、HBase的包
+2、Zookeeper的包
+3、protobuf的包
+然后执行程序即可
