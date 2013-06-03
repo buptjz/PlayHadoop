@@ -15,4 +15,11 @@
 		<nature>org.apache.hadoop.eclipse.Nature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Linux-i386-32</name>
+			<type>2</type>
+			<location>/home/wangjz/hadoop-1.0.4/lib/native/Linux-i386-32</location>
+		</link>
+	</linkedResources>
 </projectDescription>
