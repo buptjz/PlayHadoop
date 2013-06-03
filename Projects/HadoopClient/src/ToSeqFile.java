@@ -31,8 +31,8 @@ public class ToSeqFile extends Configured implements Tool {
 		FileSystem fs = FileSystem.get(conf);
 
 		FileInputFormat.setInputPaths(job, "hdfs://localhost:9000/user/wangjz/data_in/");
-		Path outDir=new Path("/home/wangjz/Desktop/1");
-		fs.delete(outDir,true);
+		//Path outDir=new Path("/home/wangjz/Desktop/1");
+		//fs.delete(outDir,true);
 		//FileOutputFormat.setOutputPath(job, outDir);
 		
 		FileOutputFormat.setOutputPath(job, new Path("hdfs://localhost:9000/user/wangjz/outdata"));
