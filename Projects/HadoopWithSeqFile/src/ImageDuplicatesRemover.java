@@ -1,3 +1,9 @@
+/**
+ * http://eldadlevy.wordpress.com/2011/02/05/hadoop-binary-files-processing-entroduced-by-image-duplicates-finder/
+ * 利用Hadoop的SequenceFile文件来保存图像
+ * 对图像文件进行去重操作
+ * 使用的方法是Md5？还没有详细研究
+ * **/
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

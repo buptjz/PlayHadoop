@@ -1,3 +1,12 @@
+/**特别好用的类
+ * 将许多小的images文件生成一个sequenceFile
+ * 输入是一个log文件，每一行是在HDFS中的一个image路径
+ * 输出是part-0000这样的一个sequenceFile文件
+ * 在http://stackoverflow.com/questions/8754154/hadoop-example-process-to-generating-a-sequencefile-with-image-binaries-to-be-p
+ * 这个提问中找到了http://eldadlevy.wordpress.com/2011/02/05/hadoop-binary-files-processing-entroduced-by-image-duplicates-finder/
+ * 需要飞墙
+ * **/
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;

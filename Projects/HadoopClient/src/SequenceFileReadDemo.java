@@ -1,5 +1,7 @@
 /**尝试将ToSeqFile类打包成的SeqFile读取出来，但是好像读取的有问题
  * 所以我信件了一个工程HadoopWithSequenceFile来继续研究，这个文件就暂时放在一边了
+ * 恩，我用BinaryFilesToHadoopSequenceFile来生成sequenceFile的时候就可以没问题
+ * 输出的结果也是正确的!
  * **/
 import java.io.IOException;
 import java.net.URI;
@@ -18,15 +20,11 @@ public class SequenceFileReadDemo {
     	Configuration conf = new Configuration();
         Path path = new Path("/home/wangjz/Desktop/part-r-00001");
         SequenceFile.Reader reader = new SequenceFile.Reader(FileSystem.get(conf), path, conf);
-        
-        
-        //String uri = args[0];
+
 //        String uri = "hdfs://localhost:9000/user/wangjz/outdata/";
 //        Configuration conf = new Configuration();
 //        FileSystem fs = FileSystem.get(URI.create(uri), conf);
 //        Path path = new Path(uri);
-//
-//        
 //        SequenceFile.Reader reader = null;
         try {
             //reader = new SequenceFile.Reader(fs, path, conf);
