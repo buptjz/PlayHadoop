@@ -52,5 +52,8 @@
 	<classpathentry kind="lib" path="/home/wangjz/hadoop-1.0.4/hadoop-client-1.0.4.jar"/>
 	<classpathentry kind="lib" path="/home/wangjz/hadoop-1.0.4/hadoop-minicluster-1.0.4.jar"/>
 	<classpathentry kind="lib" path="/home/wangjz/hadoop-1.0.4/hadoop-tools-1.0.4.jar"/>
+	<classpathentry kind="lib" path="/home/wangjz/Development/PlayHadoop/javacv/javacv-linux-x86.jar"/>
+	<classpathentry kind="lib" path="/home/wangjz/Development/PlayHadoop/javacv/javacpp.jar"/>
+	<classpathentry kind="lib" path="/home/wangjz/Development/PlayHadoop/javacv/javacv.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -4,6 +4,8 @@
  * 对图像文件进行去重操作
  * 使用的方法是Md5？还没有详细研究
  * **/
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,6 +14,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
@@ -19,6 +22,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.input.SequenceFileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
+import org.apache.hadoop.util.ReflectionUtils;
 
 public class ImageDuplicatesRemover {
 	
@@ -27,6 +31,13 @@ public class ImageDuplicatesRemover {
 		public void map(Text key, BytesWritable value, Context context) throws IOException,InterruptedException {
 			//get the md5 for this specific file
 	        String md5Str;
+	       
+	        //将文件保存在本地目录中
+	        String fileName = "/home/wangjz/Desktop/1/"+key.toString().split("/")[6];
+	        DataOutputStream out=new DataOutputStream(new FileOutputStream(fileName));  
+	        out.write(value.getBytes());
+	        out.close();  
+            
 			try {
 				md5Str = calculateMd5(value.getBytes());
 			} catch (NoSuchAlgorithmException e) {
