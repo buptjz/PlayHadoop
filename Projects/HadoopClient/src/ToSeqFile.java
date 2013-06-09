@@ -1,4 +1,5 @@
 /**
+ *
  *这是在网上找到了将许多小文件转换成 sequence File的方式
  *最开始job.setNumReduceTasks(0);的时候只能得到若干个part
  *而将其改成1的时候
@@ -40,7 +41,7 @@ public class ToSeqFile extends Configured implements Tool {
 		// increase if you need sorting or a special number of files
 		//job.setNumReduceTasks(0);
 		job.setNumReduceTasks(1);
-		job.setOutputKeyClass(LongWritable.class);
+		job.setOutputKeyClass(LongWritable.class);//这里的类型都不让改，那么我怎么保存二进制文件呢？
 		job.setOutputValueClass(Text.class);
 		//设置OutputFormat为SequenceFileOutputFormat
 		job.setOutputFormatClass(SequenceFileOutputFormat.class);

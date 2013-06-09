@@ -5,8 +5,8 @@
  * 在http://stackoverflow.com/questions/8754154/hadoop-example-process-to-generating-a-sequencefile-with-image-binaries-to-be-p
  * 这个提问中找到了http://eldadlevy.wordpress.com/2011/02/05/hadoop-binary-files-processing-entroduced-by-image-duplicates-finder/
  * 需要飞墙
+ * 参考http://www.linuxidc.com/Linux/2012-05/61250.htm
  * **/
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.URI;
@@ -27,47 +27,42 @@ import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 import org.apache.log4j.Logger;
 
-
 public class BinaryFilesToHadoopSequenceFile {
 
 	private static Logger logger = Logger.getLogger(BinaryFilesToHadoopSequenceFile.class);
-
 	public static class BinaryFilesToHadoopSequenceFileMapper extends Mapper<Object, Text, Text, BytesWritable> {
-
 		public void map(Object key, Text value, Context context) 
 		throws IOException, InterruptedException {
 
 			logger.info("map method called..");
-			String uri = value.toString();
+			String uri = "hdfs://localhost:9000/user/wangjz/data_in/" + value.toString();
 			Configuration conf = new Configuration();
 			FileSystem fs = FileSystem.get(URI.create(uri), conf);
 			FSDataInputStream in = null;
 			try {
 				in = fs.open(new Path(uri));
 				java.io.ByteArrayOutputStream bout = new ByteArrayOutputStream();
-				byte buffer[] = new byte[1024 * 1024];
-
-				while( in.read(buffer, 0, buffer.length) >= 0 ) {
-					bout.write(buffer);
-				}
+				IOUtils.copyBytes(in, bout,4096,false); //用这个方法好像好了！！
+//				byte buffer[] = new byte[1024 * 1024];//这里使用了固定大小，所以每个小文件都占用1M的大小
+//				while( in.read(buffer, 0, buffer.length) >= 0 ) {
+//					bout.write(buffer);
+//				}
 				context.write(value, new BytesWritable(bout.toByteArray()));
 			} finally {
 				IOUtils.closeStream(in);
 			}
 		}
-
 	}
 
 
 	public static void main(String[] args) throws Exception {
+		//运行的参数：hdfs://localhost:9000/user/wangjz/data_in/1000.log hdfs://localhost:9000/user/wangjz/data_out/
 		Configuration conf = new Configuration();
 		String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
 		if (otherArgs.length != 2) {
 			System.err.println("Usage: BinaryFilesToHadoopSequenceFile <in Path for url file> <out pat for sequence file>");
 			System.exit(2);
 		}
-		
-
 		Job job = new Job(conf, "BinaryFilesToHadoopSequenceFile");
 		job.setJarByClass(BinaryFilesToHadoopSequenceFile.class);
 		job.setMapperClass(BinaryFilesToHadoopSequenceFileMapper.class);
