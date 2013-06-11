@@ -1,7 +1,5 @@
 /**
- *  目前是能够将SeqFile转换成单独的Image并调用OpencvTest程序来计算图像的colorfulness
- * 参考自ImageDuplicatesRemover
- * 将sequence文件解析成image文件，并用二进制的方式直接保存在本地
+ * 能够将SeqFile转换成单独的Image并调用OpencvTest程序来计算图像的特征
  * **/
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

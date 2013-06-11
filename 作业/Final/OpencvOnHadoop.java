@@ -1,12 +1,5 @@
 /**
- * 这个测试主要是考虑到在Hadoop中使用opencv提取图像特征
- * 参考网上的例子，实现了Hadoop与本地其他应用程序的衔接
- * 《Hadoop 运行 c++ 程序实验》
- * http://www.cnblogs.com/Donal/archive/2012/03/09/2387873.html
- * 作者调用了C＋＋程序，我在这里调用了OPENCV程序，名字叫做OPENCVTest
- * 我尝试了调用python程序，也是成功的
- * 
- *目前这个类作为实验的对比项，不用sequenceFile
+ *作为实验的对比项，不使用sequenceFile,单独处理每一个图像文件
  * **/
 
 import java.io.BufferedReader;
