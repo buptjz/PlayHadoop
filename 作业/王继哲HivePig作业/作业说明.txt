@@ -1,0 +1,32 @@
+Hive和Pig的作业说明
+王继哲
+
+1、Hive使用流程
+
+1）创建Table，这里的delimited fields terminated by '\t' 非常重要，否则Hive将错误匹配access.log中的信息
+CREATE TABLE myNet (dateV STRING,userID STRING,ip string,site string,spName string,upTra int, downTra int) row format delimited fields terminated by '\t' stored as textfile;
+
+2）加载数据
+LOAD DATA INPATH '/user/wangjz/data_in/access.logD' INTO table myNet; 
+
+3）统计每个网站不同用户的访问次数
+SELECT site, COUNT(DISTINCT userID) FROM myNet GROUP BY site;
+
+4）统计每个用户访问方站的流量，按照流量升序排列
+SELECT userID, spName,upTra FROM myNet WHERE upTra >= 0 ORDER BY upTra ASC;
+
+2、Pig使用流程
+
+1)加载数据
+items = LOAD '/user/wangjz/data_in/access.logD' AS (dateV:chararray, userID:chararray, ip:chararray,site:chararray,spName:chararray,upTra:int,downTra:int);
+
+2）展示数据
+dump items;
+
+3）过滤并展示过滤后的数据（列出所有访问uc的条目）
+filtered_items = FILTER items BY spName MATCHES '*uc*';
+dump filtered_items;
+
+4)按照某一个属性排序
+ordered_items = ORDER filtered_items BY upTra; 
+

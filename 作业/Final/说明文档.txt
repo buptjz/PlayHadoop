@@ -1,0 +1,13 @@
+1)课程设计主要内容:“使用Hadoop提取图像的特征”
+2)实验的假设是：在对大量小文件进行处理时，采用SequenceFile的形式可以有效提升分布式计算的速度。
+3)设计对比实验:实验组采用SequenceFile的形式存储大量小图片，而对照组则不实用SequenceFile，分别记录程序执行的时间。
+4)实验结果显示:实验组的执行速度远远快于对照组，证明了假设是成里的。
+==================================================================================================
+包含的文件说明如下：
+BinaryFilesToHadoopSequenceFile.java是将大量小图片转换成为一个SequenceFile文件
+SequenceFileToImage.java对SequenceFile进行解析，Mapper分别提取每一幅图像的特征，Reducer将所有图像特征写入一个文件（实验组）
+OpencvOnHadoop.java直接处理HDFS上的单独的图片（对照组）
+StreamGobbler.java是Hadoop程序调用本地程序的接口
+
+1000items:图像数量是1000时的输出结果
+王继哲_课程设计报告:课程设计演示报告
